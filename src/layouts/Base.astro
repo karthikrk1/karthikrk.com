@@ -1,0 +1,84 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const siteName = 'Karthik Ramakrishnan';
+const {
+  title,
+  description = 'Karthik Ramakrishnan — Senior Data Engineer at Walmart Global Tech, building data platforms and pipelines at scale.',
+} = Astro.props;
+
+const pageTitle = title ? `${title} · ${siteName}` : `${siteName} · Senior Data Engineer`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/resume.pdf', label: 'Résumé' },
+];
+
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+
+const links = {
+  github: 'https://github.com/karthikrk1',
+  linkedin: 'https://www.linkedin.com/in/karthikrk1',
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a href="/" class="brand" aria-label="Karthik Ramakrishnan, home">
+          <span class="brand-mark" aria-hidden="true">K</span>
+          <span class="brand-name">Karthik Ramakrishnan</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          {nav.map(({ href, label }) => (
+            <a href={href} aria-current={isActive(href) ? 'page' : undefined}>{label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© {new Date().getFullYear()} Karthik Ramakrishnan</span>
+        <span>
+          <a href={links.github} rel="noopener">GitHub</a>
+          <a href={links.linkedin} rel="noopener">LinkedIn</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

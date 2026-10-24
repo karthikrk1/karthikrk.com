@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getProjects } from '../../lib/projects';
+
+const projects = await getProjects();
+---
+
+<Base title="Projects" description="Data engineering projects and case studies by Karthik Ramakrishnan.">
+  <h1>Projects</h1>
+  <p class="lede">Case studies on things I've built: the problem, the design, and the trade-offs.</p>
+
+  <h2>All projects</h2>
+  {projects.length > 0 ? (
+    <div class="cards">
+      {projects.map((p) => (
+        <a class="card" href={`/projects/${p.id}/`}>
+          <h3>{p.data.title}{p.data.draft && ' (draft)'}</h3>
+          <p>{p.data.summary}</p>
+          {p.data.tags.length > 0 && (
+            <ul class="tags">{p.data.tags.map((t) => <li>{t}</li>)}</ul>
+          )}
+        </a>
+      ))}
+    </div>
+  ) : (
+    <p class="empty">Case studies are on the way.</p>
+  )}
+</Base>
