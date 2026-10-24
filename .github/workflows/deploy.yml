@@ -38,20 +38,20 @@ jobs:
       - name: Sign in to AWS
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Upload to S3
         run: |
           # Fingerprinted CSS/JS bundles never change so cache for a year
-          aws s3 sync dist/_astro "s3://${{ vars.S3_BUCKET }}/_astro" \
+          aws s3 sync dist/_astro "s3://${{ secrets.S3_BUCKET }}/_astro" \
             --cache-control "public, max-age=31536000, immutable" \
-          aws s3 sync dist/_astro "s3://${{ vars.S3_BUCKET }}/_astro" \
+          aws s3 sync dist/_astro "s3://${{ secrets.S3_BUCKET }}/_astro" \
             --delete --exclude "_astro/*" \
             --cache-control "public, max-age=300"
       
       - name: Clear Cloudfront cache
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
             --paths "/*"
