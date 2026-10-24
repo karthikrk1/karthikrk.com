@@ -1,0 +1,55 @@
+---
+title: payments-risk-warehouse
+summary: A dbt + DuckDB warehouse that models payment fraud risk on the PaySim dataset.
+date: 2026-10-01
+tags: [dbt, DuckDB, SQL, Data modeling]
+repo: https://github.com/karthikrk1/payments-risk-warehouse
+featured: true
+order: 1
+# Draft pages show in `npm run dev` but are left out of the live site.
+# Change to false once the sections below are filled in.
+draft: true
+---
+
+{/*
+  Case-study template. Replace each italic prompt with your own write-up.
+  Aim for something a hiring manager can skim in 2–3 minutes:
+  short paragraphs, one diagram, and concrete numbers where you have them.
+*/}
+
+## The problem
+
+_What question does this warehouse answer, and who would use it? For example, a risk team
+that needs to spot suspicious transaction patterns and track fraud rates over time._
+
+## The data
+
+_Describe PaySim briefly: what it simulates, its size (rows, date range), and the fields
+that matter. Note any quirks you had to handle, such as class imbalance or balance
+inconsistencies._
+
+## Architecture
+
+_Add a diagram here. A simple flow works well: raw CSV → staging → intermediate → marts →
+analysis. Put an image in `public/images/` and reference it like this:_
+
+{/* ![Pipeline diagram](/images/payments-risk-warehouse.png) */}
+
+## Modeling decisions
+
+_The heart of the case study. Two to four decisions, each with the trade-off. Examples:_
+
+- _Why DuckDB instead of a cloud warehouse for this project._
+- _How the staging, intermediate, and mart layers are split._
+- _Which dbt tests you added, and what they caught._
+- _How you modeled accounts, transactions, and risk features._
+
+## Results
+
+_What can someone learn from the marts? Include a key metric, a chart, or a sample query,
+and anything surprising you found._
+
+## What I'd do next
+
+_Two or three realistic extensions: incremental models, orchestration, a dashboard,
+moving to a cloud warehouse._

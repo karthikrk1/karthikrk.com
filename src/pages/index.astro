@@ -1,16 +1,70 @@
 ---
+import Base from '../layouts/Base.astro';
+import { getProjects } from '../lib/projects';
+
+const projects = await getProjects();
+const featured = projects.filter((p) => p.data.featured).slice(0, 3);
+const shown = featured.length > 0 ? featured : projects.slice(0, 3);
+
+// Edit these to match your résumé.
+const experience = [
+  {
+    role: 'Senior Data Engineer',
+    org: 'Walmart Global Tech',
+    when: '2022 – present',
+  },
+  {
+    role: 'Software Engineer',
+    org: 'Gallup',
+    when: '', // e.g. '2017 – 2022'
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+  <section>
+    <p class="eyebrow">Senior Data Engineer</p>
+    <h1>Karthik Ramakrishnan</h1>
+    <p class="lede">
+      I build data platforms and pipelines at scale — currently at Walmart Global Tech,
+      with over ten years in software and data engineering.
+    </p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/projects/">View projects</a>
+      <a class="btn" href="/resume.pdf">Résumé</a>
+      <a class="btn" href="https://github.com/karthikrk1" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/karthikrk1" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Selected projects</h2>
+    {shown.length > 0 ? (
+      <div class="cards">
+        {shown.map((p) => (
+          <a class="card" href={`/projects/${p.id}/`}>
+            <h3>{p.data.title}</h3>
+            <p>{p.data.summary}</p>
+            {p.data.tags.length > 0 && (
+              <ul class="tags">{p.data.tags.map((t) => <li>{t}</li>)}</ul>
+            )}
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p class="empty">Case studies are on the way.</p>
+    )}
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+    <ul class="timeline">
+      {experience.map((e) => (
+        <li>
+          <span class="role-title">{e.role}</span>
+          <span class="meta">{e.org}{e.when && ` · ${e.when}`}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
