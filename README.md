@@ -33,9 +33,12 @@ src/
 public/                     # served as-is: résumé PDF, icons, social preview image
 ```
 
-- **Your details** (name, role, links): edit `src/site.ts`.
+- **Your details** (name, role, email, links): edit `src/site.ts`.
 - **Experience list:** edit the `experience` array in `src/pages/index.astro`.
-- **Résumé:** replace `public/resume.pdf`.
+- **Résumé:** edit `resume/resume.yaml`, then run `npm run resume` to rebuild `public/resume.pdf`
+  (needs [uv](https://docs.astral.sh/uv/); it fetches ReportLab itself). The layout is in
+  `resume/build_resume.py`. The PDF is public, so keep the content to what you want published: the
+  email is the forwarding address `karthik@karthikrk.com`, and there's no phone number.
 
 ## Adding a case study
 

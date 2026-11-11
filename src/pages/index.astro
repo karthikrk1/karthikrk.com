@@ -16,7 +16,7 @@ const experience = [
   {
     role: 'Software Engineer',
     org: 'Gallup',
-    when: '', // e.g. '2017 – 2022'
+    when: '2017 – 2022',
   },
 ];
 ---
@@ -34,6 +34,7 @@ const experience = [
       <a class="btn" href={site.resume}>Résumé</a>
       <a class="btn" href={site.links.github} rel="noopener">GitHub</a>
       <a class="btn" href={site.links.linkedin} rel="noopener">LinkedIn</a>
+      <a class="btn" href={`mailto:${site.email}`}>Email</a>
     </div>
   </section>
 
