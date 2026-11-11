@@ -1,12 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getProjects } from '../lib/projects';
+import { site } from '../site';
 
 const projects = await getProjects();
 const featured = projects.filter((p) => p.data.featured).slice(0, 3);
 const shown = featured.length > 0 ? featured : projects.slice(0, 3);
 
-// Edit these to match your résumé.
 const experience = [
   {
     role: 'Senior Data Engineer',
@@ -23,17 +23,17 @@ const experience = [
 
 <Base>
   <section>
-    <p class="eyebrow">Senior Data Engineer</p>
-    <h1>Karthik Ramakrishnan</h1>
+    <p class="eyebrow">{site.role}</p>
+    <h1>{site.name}</h1>
     <p class="lede">
       I build data platforms and pipelines at scale — currently at Walmart Global Tech,
       with over ten years in software and data engineering.
     </p>
     <div class="actions">
       <a class="btn btn-primary" href="/projects/">View projects</a>
-      <a class="btn" href="/resume.pdf">Résumé</a>
-      <a class="btn" href="https://github.com/karthikrk1" rel="noopener">GitHub</a>
-      <a class="btn" href="https://www.linkedin.com/in/karthikrk1" rel="noopener">LinkedIn</a>
+      <a class="btn" href={site.resume}>Résumé</a>
+      <a class="btn" href={site.links.github} rel="noopener">GitHub</a>
+      <a class="btn" href={site.links.linkedin} rel="noopener">LinkedIn</a>
     </div>
   </section>
 
